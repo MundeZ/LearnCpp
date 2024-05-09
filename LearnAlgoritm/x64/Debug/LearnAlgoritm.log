@@ -1,0 +1,5 @@
+﻿  LearnAlgoritm.cpp
+  homework1.cpp
+  Generating Code...
+C:\MyProject\LearnAlgoritm\LearnAlgoritm.cpp(250): warning C4715: 'binarySearch': not all control paths return a value
+  LearnAlgoritm.vcxproj -> C:\MyProject\LearnAlgoritm\x64\Debug\LearnAlgoritm.exe
