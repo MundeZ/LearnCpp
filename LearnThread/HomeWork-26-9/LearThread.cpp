@@ -20,15 +20,13 @@ int main()
 	std::vector<std::thread> threads; // Массив потоков
 	int sum = 0;
 
-	for (size_t i = 0; i < n; i++) // Генерим массив рандомных чисел
-	{
+	for (size_t i = 0; i < n; i++) {
 		numbers.push_back(rand());
 	}
 	
 
 	size_t partSize = n / m;
-	for (int i = 0; i < m; i++)
-	{
+	for (int i = 0; i < m; i++) {
 		size_t start = i * partSize;
 		size_t end = (i == m - 1) ? n : (i + 1) * partSize;
 
@@ -39,8 +37,7 @@ int main()
 	}
 
 
-	for (std::thread& t : threads) // Ожидаем завершения всех потоков
-	{
+	for (std::thread& t : threads) {
 		t.join();
 	}
 
