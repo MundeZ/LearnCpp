@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="AVL.cpp" />
     <ClCompile Include="Module14.cpp" />
+    <ClCompile Include="RBT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVL.h" />
+    <ClInclude Include="RBT.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

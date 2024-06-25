@@ -1,11 +1,11 @@
 #include "AVL.h"
 
 void AVL::insert(int key) {
-    Node* node = new Node(key);
+    NodeAVL* node = new NodeAVL(key);
     _root = insert(_root, node);
 }
 
-Node* AVL::insert(Node* root, Node* const node) {
+NodeAVL* AVL::insert(NodeAVL* root, NodeAVL* const node) {
     if (!root)
         return node;
 
@@ -17,7 +17,7 @@ Node* AVL::insert(Node* root, Node* const node) {
     return balance(root);
 }
 
-Node* AVL::removemin(Node* node) {
+NodeAVL* AVL::removemin(NodeAVL* node) {
     if (!node->left) {
         return node->right;
     }
@@ -27,7 +27,7 @@ Node* AVL::removemin(Node* node) {
     return balance(node);
 }
 
-Node* AVL::findmin(Node* node) {
+NodeAVL* AVL::findmin(NodeAVL* node) {
     return node->left ? findmin(node->left) : node;
 }
 
@@ -35,7 +35,7 @@ void AVL::delete_node(const int& key) {
     _root = delete_node(_root, key);
 }
 
-Node* AVL::delete_node(Node* node, const int& key) {
+NodeAVL* AVL::delete_node(NodeAVL* node, const int& key) {
     if (!node)
         return nullptr;
 
@@ -45,8 +45,8 @@ Node* AVL::delete_node(Node* node, const int& key) {
         node->right = delete_node(node->right, key);
     else //  k == p->key
     {
-        Node* q = node->left;
-        Node* r = node->right;
+        NodeAVL* q = node->left;
+        NodeAVL* r = node->right;
         node->left = nullptr;
         node->right = nullptr;
         delete node;
@@ -54,7 +54,7 @@ Node* AVL::delete_node(Node* node, const int& key) {
         if (!r)
             return q;
 
-        Node* min = findmin(r);
+        NodeAVL* min = findmin(r);
         min->right = removemin(r);
         min->left = q;
         return balance(min);
@@ -63,24 +63,24 @@ Node* AVL::delete_node(Node* node, const int& key) {
     return balance(node);
 }
 
-size_t AVL::height(Node* node) {
+size_t AVL::height(NodeAVL* node) {
     return node ? node->height : 0;
 }
 
-int AVL::bfactor(Node* node) {
+int AVL::bfactor(NodeAVL* node) {
     return height(node->right) - height(node->left);
 }
 
-void AVL::fix_height(Node* node) {
+void AVL::fix_height(NodeAVL* node) {
     size_t h_left = height(node->left);
     size_t h_right = height(node->right);
 
     node->height = (h_left > h_right ? h_left : h_right) + 1;
 }
 
-Node* AVL::rotateRight(Node* node)
+NodeAVL* AVL::rotateRight(NodeAVL* node)
 {
-    Node* q = node->left;
+    NodeAVL* q = node->left;
 
     node->left = q->right;
     q->right = node;
@@ -90,9 +90,9 @@ Node* AVL::rotateRight(Node* node)
     return q;
 }
 
-Node* AVL::rotateLeft(Node* node)
+NodeAVL* AVL::rotateLeft(NodeAVL* node)
 {
-    Node* q = node->right;
+    NodeAVL* q = node->right;
 
     node->right = q->left;
     q->left = node;
@@ -102,7 +102,7 @@ Node* AVL::rotateLeft(Node* node)
     return q;
 }
 
-Node* AVL::balance(Node* node) {
+NodeAVL* AVL::balance(NodeAVL* node) {
     // вычисляем правильную высоту для узла
     fix_height(node);
 
@@ -123,17 +123,17 @@ Node* AVL::balance(Node* node) {
     return node;
 }
 
-const Node* AVL::bfs(const int& key) {
+const NodeAVL* AVL::bfs(const int& key) {
     if (_root == nullptr) {
         return nullptr;
     }
 
-    std::queue<Node*> q;
+    std::queue<NodeAVL*> q;
 
     q.push(_root);
 
     while (!q.empty()) {
-        Node* node = q.front();
+        NodeAVL* node = q.front();
         q.pop();
 
         if (node->key == key) {
@@ -157,11 +157,11 @@ void AVL::print_data() {
         return;
     }
 
-    std::queue<Node*> q;
+    std::queue<NodeAVL*> q;
     q.push(_root);
 
     while (!q.empty()) {
-        Node* node = q.front();
+        NodeAVL* node = q.front();
         q.pop();
 
         std::cout << "node key " << node->key << std::endl;
